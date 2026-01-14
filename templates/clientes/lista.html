@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Clientes</h2>
+
+<a href="{% url 'clientes:cliente_crear' %}">Nuevo cliente</a>
+
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Monto total prestado</th>
+        <th>Monto total pagado</th>
+        <th>Saldo total pendiente</th>
+        <th>Detalle</th>
+    </tr>
+
+    {% for c in clientes %}
+    <tr>
+        <td>{{ c.nombre }}</td>
+        <td>{{ c.total_prestado }}</td>
+        <td>{{ c.total_pagado }}</td>
+        <td>{{ c.total_pendiente }}</td>
+        <td>
+            <a href="{% url 'clientes:cliente_detalle' c.id %}">Detalle</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

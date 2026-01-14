@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+
+<h1>Gestión de prestamos</h1>
+Sistema interno para control de clientes, prestamos, y pagos
+
+<ul>
+    <li><a href="{% url 'clientes:cliente_lista' %}">Ver clientes</a></li>
+    <li><a href="{% url 'clientes:reporte_deudas' %}">Estado de deudas</a></li>
+</ul>
+
+{% endblock %}

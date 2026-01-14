@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Estado de Deudas</h2>
+<table>
+    <tr>
+        <th>Cliente</th>
+        <th>Prestado</th>
+        <th>Pagado</th>
+        <th>Saldo</th>
+    </tr>
+    {% for c in clientes %}
+    <tr>
+        <td>{{ c.nombre }}</td>
+        <td>{{ c.monto_total_prestado }}</td>
+        <td>{{ c.monto_total_pagado }}</td>
+        <td>{{ c.saldo_total_pendiente }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

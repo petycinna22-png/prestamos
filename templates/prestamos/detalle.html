@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Prestamo {{ prestamo.id }}</h1>
+
+<p>
+    Prestado: {{ prestamo.monto }}
+    <br>
+    Pagado: {{ prestamo.cantidad_pagado }}
+    <br>
+    Fecha: {{ prestamo.fecha_inicio|date:"Y/m/d" }}
+    <br>
+    Deuda pendiente: <b>{{ prestamo.saldo_pendiente }}</b>
+</p>
+
+<a href="{% url 'pagos:pago_crear' prestamo.id %}">Nuevo pago</a>
+
+<h3>Pagos</h3>
+
+
+<table>
+    <tr>
+        <th>Pago</th>
+        <th>Fecha de pago</th>
+        <th>Monto pagado</th>
+        <th>Detalle</th>
+    </tr>
+
+    {% for p in pagos %}
+    <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.fecha|date:"Y/m/d" }}</td>
+        <td>{{ p.monto }}</td>
+        <td>{{ p.nota }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+/* navbar.css */
+nav {
+    background-color: #333;  /* Fondo oscuro para la barra */
+    padding: 10px 0;         /* Espacio arriba y abajo */
+    text-align: center;      /* Centrar los enlaces */
+}
+
+nav a {
+    color: white;             /* Color de texto blanco */
+    text-decoration: none;    /* Quitar el subrayado */
+    margin: 0 15px;           /* Espacio entre los enlaces */
+    font-size: 18px;          /* Tamaño de fuente */
+    transition: color 0.3s;   /* Transición para el hover */
+}
+
+/* Efecto al pasar el mouse sobre los enlaces */
+nav a:hover {
+    color: #ff6347;  /* Color de texto cuando el mouse pasa sobre el enlace (puedes elegir otro) */
+}
+
+/* Opcional: agregar un borde debajo de los enlaces cuando el usuario hace hover */
+nav a:hover {
+    border-bottom: 2px solid #ff6347;
+}
+
+/* Si usas un <hr> después del navbar, podemos darle un estilo más limpio */
+hr {
+    border: 1px solid #ddd; /* Un borde claro para separar el navbar del contenido */
+    margin-top: 0;           /* Eliminar espacio extra encima */
+}
+
+/* Hacer que el navbar sea fijo en la parte superior */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;  /* Para que ocupe todo el ancho de la página */
+    z-index: 1000;  /* Asegúrate de que esté encima del contenido */
+}

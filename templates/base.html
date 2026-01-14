@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Document{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+    <!-- CSS globales que se usan en todo el proyecto -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+    <!-- CSS específicos de alguna app (si es necesario) -->
+    <link rel="stylesheet" href="{% static 'css/app1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app2.css' %}">
+
+    <!-- Si tienes un CSS específico para alguna página, lo puedes cargar aquí -->
+    {% block extra_css %}
+    {% endblock %}
+
+
+</head>
+{% include "includes/head.html" %}
+<body>
+    {% include "includes/navbar.html" %}
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "includes/footer.html" with now=now%}
+
+</body>
+</html>

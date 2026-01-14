@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>{{ cliente.nombre }} {{ cliente.apellido }}</h2>
+
+
+<p>
+    Prestado: {{ cliente.total_prestado }}
+    <br>
+    Pagado: {{ cliente.total_pagado }}
+    <br>
+    Saldo: <b>{{ cliente.total_pendiente }}</b>
+</p>
+
+<a href="{% url 'prestamos:prestamo_crear' cliente.id %}">Nuevo prestamo</a>
+
+<h3>Prestamos</h3>
+
+
+<table>
+    <tr>
+        <th>Prestamo</th>
+        <th>Fecha Inicio</th>
+        <th>Monto prestado</th>
+        <th>Monto pendiente</th>
+        <th>Estado</th>
+    </tr>
+
+    {% for p in prestamos %}
+    <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.fecha_inicio|date:"Y/m/d" }}</td>
+        <td>{{ p.monto }}</td>
+        <td>{{ p.saldo_pendiente }}</td>
+        <td>{{ p.actualizar_estado }}</td>
+        <td>
+            <a href="{% url 'prestamos:prestamo_detalle' p.id %}">Ver</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
