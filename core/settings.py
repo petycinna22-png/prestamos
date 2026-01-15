@@ -23,20 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 env = environ.Env()
-environ.Env.read_env(env_file=BASE_DIR / '.env')
-
-# SECRET_KEY = 'django-insecure-kn1wy0b^8)alp0&mxjk*i%z19g2m2pe+-8i%zfdpv5-(ojk2#y'
+environ.Env.read_env()
 SECRET_KEY= os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+# SECRET_KEY = 'django-insecure-kn1wy0b^8)alp0&mxjk*i%z19g2m2pe+-8i%zfdpv5-(ojk2#y'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
