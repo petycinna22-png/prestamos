@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import environ
-import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,15 +22,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-env = environ.Env()
-environ.Env.read_env()
-SECRET_KEY= os.environ.get('SECRET_KEY')
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+environ.Env.read_env(BASE_DIR / '.env')
+
+SECRET_KEY= env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['*']
-
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # Application definition
 # SECRET_KEY = 'django-insecure-kn1wy0b^8)alp0&mxjk*i%z19g2m2pe+-8i%zfdpv5-(ojk2#y'
@@ -80,13 +83,17 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db(
+        default='sqlite:///{}'.format(BASE_DIR / 'db.sqlite3')
+    )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -122,5 +129,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static',]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+#CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
+#SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', default=False)
+#SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', default=False)
+#CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', default=False)
